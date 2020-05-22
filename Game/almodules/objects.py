@@ -21,6 +21,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+# Extra stuff needed at the top
+class Equipped():
+    def __init__(self):
+        self.helmet = None
+        self.chestplate = None
+        self.leggings = None
+        self.weapon = None
+
+class LootTable():
+    def __init__(self, *items):
+        super().__init__()
+        for item in items:
+            self[item.name] = (item, item.chance, item.range)
+
+class Health():
+    def __init__(self, hp=100):
+        self.current = hp
+        self.base = hp
+        self.boost = 0
+        self.regen = 0
+        self.poison = 0
+
+class Damage():
+    def __init__(self, dp=10):
+        self.current = dp
+        self.base = dp
+        self.boost = 0
+
 # Constructors
 class Item():
     class Armor():
@@ -39,19 +67,39 @@ class Item():
             self.health_boost = hb
             self.damage_bost = db
             self.equiped = False
+    class Coin():
+        def __init__(self, value: int):
+            self.value = value
+
+
+class Base():
+    def __init__(self, name, hp, bd, lt):
+        self.name = name
+        self.health = Health(hp)
+        self.damage = Damage(bd)
+        self.loot_table = LootTable(lt)
+
+class NPC():
+    class Wild():
+        class Wolf(Base):
+            def __init__(self):
+                self.equipped = Equipped()
+                self.hostility = 0.2
+    class Undead():
+        class Zombie(Base):
+            def __init__(self):
+                pass
+    class Bandit(Base):
+        class Thief():
+            def __init__(self):
+                pass
 
 # Inventory
-class Equiped():
-    def __init__(self):
-        self.helmet = None
-        self.chestplate = None
-        self.leggings = None
-        self.weapon = None
 class Inventory(dict):
     def __init__(self):
         super().__init__()
         self.size = 100
-        self.equiped = Equiped()
+        self.equipped = Equipped()
     
     def add(self, key, obj):
         if len(self.keys()>=size):
@@ -72,37 +120,24 @@ class Inventory(dict):
 
     def equip(self, key):
         try:
-            self[key].equiped = True
+            self[key].equipped = True
             if (self[key].ep==0):
-                self.equiped.helmet = self[key]
+                self.equipped.helmet = self[key]
             elif (self[key].ep==1):
-                self.equiped.chestplate = self[key]
+                self.equipped.chestplate = self[key]
             elif (self[key].ep==2):
-                self.equiped.leggins = self[key]
+                self.equipped.leggins = self[key]
             elif (self[key].ep==3):
-                self.equiped.weapon = self[key]
+                self.equipped.weapon = self[key]
         except ValueError:
             return False
         else:
             return True
 
     def get_equipped(self):
-        return {'Helmet':self.equiped.helmet,'Chestplate':self.equiped.chestplate,'Leggings':self.equiped.leggings,'Weapon':self.equiped.weapon}
+        return {'Helmet':self.equipped.helmet,'Chestplate':self.equipped.chestplate,'Leggings':self.equipped.leggings,'Weapon':self.equipped.weapon}
 
 # Player
-class Health():
-    def __init__(self):
-        self.current = 100
-        self.base = 100
-        self.boost = 0
-        self.regen = 0
-        self.poison = 0
-class Damage():
-    def __init__(self):
-        self.current = 10
-        self.base = 10
-        self.boost = 0
-
 class Player():
     def __init__(self, pname):
         self.name = pname
