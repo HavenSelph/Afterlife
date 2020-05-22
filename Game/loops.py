@@ -24,8 +24,14 @@ SOFTWARE.
 
 def loop(game):
     if (game.player.health<0):
-        # death
+        game.player.dead = True # Yes this is the single check for death lol
+        # Need to add more here...
         pass
-    elif (game.player.poison):
-        # health tick
+    elif (game.player.poison>0):
+        print(f'- You lost {game.player.poison} health to poison.')
+        game.player.health -= game.player.poison
+        pass
+    elif (game.player.regen>0):
+        print(f'+ You gained {game.player.regen} to regeneration.')
+        game.player.health += game.player.poison
         pass

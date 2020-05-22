@@ -1,3 +1,5 @@
+version = '0.0.2'
+
 """
 MIT License
 
@@ -22,10 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 # This file is mainly intended as a gameplay loop.
+from loops import loop
 from os import system
 from time import sleep
 from almodules.mainmenu import mainmenu
-
+from almodules.gamesl import save
 def clearscreen():
     system('cls')
 
@@ -35,6 +38,7 @@ if (get_terminal_size()[0]<30) or (get_terminal_size()[1]<10):
     input('...')
 
 try:
+    clearscreen()
     game = 'NULL'
     print(f'If you wish to leave, please use CTRL + C')
     print(f'Please keep in mind this game is in it\'s early stages.')
@@ -43,13 +47,25 @@ try:
     input('Press enter to continue...')
     clearscreen()
     while (game=='NULL'):
-        game = mainmenu()
+        game = mainmenu(version)
     while True:
-        input('Please close the program')
+        loop(game)
         pass
 
+# Errors
+except AttributeError as e:
+    print('This likely results from your savegame being outdated. Please make a new game.')
+    print('Screenshot this code and send it to my Repl.it and/or Github.', '\n'*2)
+    print(e)
+
+# Exits
 except KeyboardInterrupt:
     print('Closing down game...')
+    if not (game=='NULL'): # Check if game has been setup
+        save(game)
 
 except SystemExit:
     print('Closing down game...')
+    if not (game=='NULL'): # Check if game has been setup
+        save(game)
+

@@ -84,13 +84,13 @@ def setup():
             break
     return gname, pname, mseed
 
-def mainmenu():
+def mainmenu(version):
     userin = choices(('New', 'Load', 'Exit'))
     if (userin==0):
         game = setup()
         if (game=='NULL'):
             return game
-        game = SaveGame(*game)
+        game = SaveGame(version, *game)
         g_save(game)
         return game
     elif (userin==1):

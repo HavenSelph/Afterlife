@@ -33,11 +33,13 @@ def save(game):
     with open(f"{Path().resolve()}\\SaveGames\\save.alsave", "wb") as algs:
         pickle.dump(game, algs)
 
-def load():
+def load(version='NULL'):
     try:
         with open(f"{Path().resolve()}\\SaveGames\\save.alsave", "rb") as algs:
-            game = pickle.load(algs) 
+            game = pickle.load(algs)
     except:
         return False
     else:
+        if not (game.version==version) and not (version=='NULL'):
+            print('This save is outdated and likely will not work.')
         return game

@@ -27,7 +27,7 @@ class GameMap():
         self.seed = mseed
 
 class Inventory(dict):
-    def __init__(self, size):
+    def __init__(self):
         super().__init__()
         self.size = 100
     
@@ -52,14 +52,17 @@ class Player():
     def __init__(self, pname):
         self.name = pname
         self.type = None
+        self.dead = False # If you want to cheat and disable hardcore mode, ~/loops has the check for death
         self.health = 100
+        self.regen = 0
+        self.poison = 0
         self.balance = 0
         self.inventory = Inventory()
-        self.poison = False
 
 
 class SaveGame():
-    def __init__(self, gname, pname, mseed):
+    def __init__(self, version, gname, pname, mseed):
+        self.version = version
         self.name = gname
         self.player = Player(pname)
         self.map = GameMap(mseed)
