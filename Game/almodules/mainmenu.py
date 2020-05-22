@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 from .objects import SaveGame
+from .game import *
 from os import get_terminal_size
 from os import system
 from colorama import init as color
@@ -72,6 +73,7 @@ def mainmenu():
     userin = choices(('New', 'Load', 'Settings', 'Exit'))
     if (userin==0):
         game = SaveGame(*setup())
+        save(game)
     elif (userin==1):
         print('Load')
     elif (userin==2):
