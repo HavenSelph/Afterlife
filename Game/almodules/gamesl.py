@@ -38,11 +38,9 @@ def load(version='NULL'):
         with open(f"{Path().resolve()}\\SaveGames\\save.alsave", "rb") as algs:
             game = pickle.load(algs)
     except FileNotFoundError as e:
-        # print(e)
+        print(e)
+        input()
         return False
-    except () as e:
-        print(f'Unknown error reached. Please screenshot below code...\n{e}')
-        exit()
     else:
         if not (game.version==version) and not (version=='NULL'):
             while True:
@@ -55,3 +53,4 @@ def load(version='NULL'):
                         return game
                     else:
                         return 'NULL'
+        return game

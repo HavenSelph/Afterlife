@@ -98,7 +98,6 @@ def mainmenu(version):
         print('Loading savegame...')
         game = g_load(version)
         if not game:
-            # print(game)
             input('No savegame was found...')
             return 'NULL'
         return game
