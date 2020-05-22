@@ -33,7 +33,7 @@ def save(game):
     with open(f"{Path().resolve()}\\SaveGames\\save.alsave", "wb") as algs:
         pickle.dump(game, algs)
 
-def load(file):
+def load():
     try:
         with open(f"{Path().resolve()}\\SaveGames\\save.alsave", "rb") as algs:
             game = pickle.load(algs) 

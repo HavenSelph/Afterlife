@@ -38,10 +38,12 @@ try:
     game = 'NULL'
     print(f'If you wish to leave, please use CTRL + C')
     print(f'Please keep in mind this game is in it\'s early stages.')
+    print(f'Some if not all features will be unstable and or possibly removed.')
     print(f'Report bugs to the GitHub page, or on the Repl.it page please.','\n'*2)
     input('Press enter to continue...')
     clearscreen()
-    mainmenu()
+    while (game=='NULL'):
+        game = mainmenu()
     while True:
         input('Please close the program')
         pass

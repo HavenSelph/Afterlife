@@ -22,7 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 from .objects import SaveGame
-from .game import *
+from .game import save as g_save
+from .game import load as g_load
 from os import get_terminal_size
 from os import system
 from colorama import init as color
@@ -70,13 +71,20 @@ def setup():
     return gname, pname, mseed
 
 def mainmenu():
-    userin = choices(('New', 'Load', 'Settings', 'Exit'))
+    userin = choices(('New', 'Load', 'Exit'))
     if (userin==0):
         game = SaveGame(*setup())
-        save(game)
+        g_save(game)
+        return game
     elif (userin==1):
-        print('Load')
+        clearscreen()
+        print('Loading savegame...')
+        game = g_load()
+        if not game:
+            input('No savegame was found...')
+            return 'NULL'
+        return game
+#    elif (userin==2):
+#        print('Settings')
     elif (userin==2):
-        print('Settings')
-    elif (userin==3):
         exit()
