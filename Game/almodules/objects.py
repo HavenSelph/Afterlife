@@ -21,11 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-
-class BasicChild():
-    def __init__(self):
-        super().__init__()
-
+# Constructors
 class Item():
     class Armor():
         def __init__(self, name: str, ep: int, hb: int=0, db: int=0):
@@ -44,16 +40,18 @@ class Item():
             self.damage_bost = db
             self.equiped = False
 
+# Inventory
+class Equiped():
+    def __init__(self):
+        self.helmet = None
+        self.chestplate = None
+        self.leggings = None
+        self.weapon = None
 class Inventory(dict):
     def __init__(self):
         super().__init__()
         self.size = 100
-        # Equipment
-        self.equiped = BasicChild()
-        self.equiped.helmet = None
-        self.equiped.chestplate = None
-        self.equiped.leggings = None
-        self.equiped.weapon = None
+        self.equiped = Equiped()
     
     def add(self, key, obj):
         if len(self.keys()>=size):
@@ -69,7 +67,7 @@ class Inventory(dict):
         else:
             return False
     
-    def getall(self):
+    def get_all(self):
         return self.keys()
 
     def equip(self, key):
@@ -88,34 +86,45 @@ class Inventory(dict):
         else:
             return True
 
-    def getequiped(self):
+    def get_equipped(self):
         return {'Helmet':self.equiped.helmet,'Chestplate':self.equiped.chestplate,'Leggings':self.equiped.leggings,'Weapon':self.equiped.weapon}
-        
+
+# Player
+class Health():
+    def __init__(self):
+        self.current = 100
+        self.base = 100
+        self.boost = 0
+        self.regen = 0
+        self.poison = 0
+class Damage():
+    def __init__(self):
+        self.current = 10
+        self.base = 10
+        self.boost = 0
 
 class Player():
     def __init__(self, pname):
         self.name = pname
         self.type = None
         self.dead = False # If you want to cheat and disable hardcore mode, ~/loops has the check for death
-        # Health stats
-        self.health = BasicChild()
-        self.health.current = 100
-        self.health.base = 100
-        self.health.boost = 0
-        self.health.regen = 0
-        self.health.poison = 0
+        # Health Stats
+        self.health = Health()
         # Damage Stats
-        self.damage = BasicChild()
+        self.damage = Damage()
         self.damage.current = 0
         self.damage.base = 0
         self.damage.boost = 0
+        # Balance Stats
         self.balance = 0
         self.inventory = Inventory()
 
+# Gamemap
 class GameMap():
     def __init__(self, mseed):
         self.seed = mseed
 
+# All objects
 class SaveGame():
     def __init__(self, version, gname, pname, mseed):
         self.version = version

@@ -63,7 +63,7 @@ def setup():
     while True:
         clearscreen()
         userin = input('Please name your world:\n>>> ')
-        if (len(userin)>3):
+        if (len(userin)>2):
             gname = userin
             break
     while True:
@@ -79,7 +79,7 @@ def setup():
     while True:
         clearscreen()
         userin = input('Please name your character:\n>>> ')
-        if (len(userin)>3):
+        if (len(userin)>2):
             pname = userin
             break
     return gname, pname, mseed
@@ -98,6 +98,7 @@ def mainmenu(version):
         print('Loading savegame...')
         game = g_load(version)
         if not game:
+            # print(game)
             input('No savegame was found...')
             return 'NULL'
         return game

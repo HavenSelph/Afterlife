@@ -8,7 +8,11 @@
 *I don't mind if you do that on here or on Repl.it.*
 
 # Changelogs
-### Version 0.0.5
+### Version 0.0.5b
+- Fixed massive class system issue
+- Fixed save issues
+
+### Version 0.0.5a
 - Added the entire inventory system
 - Added everything needed for items
 - Fixed many version change issues

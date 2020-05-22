@@ -31,14 +31,18 @@ def clearscreen():
 
 def save(game):
     with open(f"{Path().resolve()}\\SaveGames\\save.alsave", "wb") as algs:
-        pickle.dump(game, algs)
+        pickle.dump(game, algs, protocol=pickle.HIGHEST_PROTOCOL)
 
 def load(version='NULL'):
     try:
         with open(f"{Path().resolve()}\\SaveGames\\save.alsave", "rb") as algs:
             game = pickle.load(algs)
-    except:
+    except FileNotFoundError as e:
+        # print(e)
         return False
+    except () as e:
+        print(f'Unknown error reached. Please screenshot below code...\n{e}')
+        exit()
     else:
         if not (game.version==version) and not (version=='NULL'):
             while True:

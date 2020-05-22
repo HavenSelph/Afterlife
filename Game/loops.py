@@ -24,22 +24,22 @@ SOFTWARE.
 
 def loop(game):
     # Health loops
-    if (game.player.health<0):
+    if (game.player.health.current<0):
         game.player.dead = True # Yes this is the single check for death lol
         # Need to add more here...
         pass
-    elif (game.player.poison>0):
-        print(f'- You lost {game.player.poison} health to poison.')
+    elif (game.player.health.poison>0):
+        print(f'- You lost {game.player.health.poison} health to poison.')
         game.player.health -= game.player.poison
         pass
-    elif (game.player.regen>0):
-        print(f'+ You gained {game.player.regen} to regeneration.')
+    elif (game.player.health.regen>0):
+        print(f'+ You gained {game.player.health.regen} to regeneration.')
         game.player.health += game.player.poison
         pass
     # Stat loops
     game.player.health.boost = 0
     game.player.damage.boost = 0
-    for item in game.inventory.getall():
-        if item.equiped:
-            game.player.health.boost += game.inventory[item].health_boost
-            game.player.damage.boost += game.inventory[item].damage_boost
+    for item in game.player.inventory.get_equipped().values():
+        if not (item==None):
+            game.player.health.boost += item.health_boost
+            game.player.damage.boost += item.damage_boost
