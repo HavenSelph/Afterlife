@@ -41,5 +41,13 @@ def load(version='NULL'):
         return False
     else:
         if not (game.version==version) and not (version=='NULL'):
-            print('This save is outdated and likely will not work.')
-        return game
+            while True:
+                clearscreen()
+                print('This save is outdated and some features likely will not work. Are you sure you wish to load it?')
+                userin = input('(Y/N) >>> ')
+                if userin.lower() in ('y','n'):
+                    if (userin.lower()=='y'):
+                        game.outdated = True
+                        return game
+                    else:
+                        return 'NULL'

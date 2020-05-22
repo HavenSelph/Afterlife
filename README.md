@@ -8,6 +8,17 @@
 *I don't mind if you do that on here or on Repl.it.*
 
 # Changelogs
+### Version 0.0.5
+- Added the entire inventory system
+- Added everything needed for items
+- Fixed many version change issues
+- Added version value in save files for protecting saves
+- Added many more tiny things
+
+### Version 0.0.4
+- Added too many things to count... 
+- I promise I'll log the next update
+
 ### Version 0.0.3
 - Added inventory backbones
 - Added save overwrite protection

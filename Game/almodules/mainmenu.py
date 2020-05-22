@@ -96,7 +96,7 @@ def mainmenu(version):
     elif (userin==1):
         clearscreen()
         print('Loading savegame...')
-        game = g_load()
+        game = g_load(version)
         if not game:
             input('No savegame was found...')
             return 'NULL'
