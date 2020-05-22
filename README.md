@@ -8,6 +8,11 @@
 *I don't mind if you do that on here or on Repl.it.*
 
 # Changelogs
+### Version 0.0.3
+- Added inventory backbones
+- Added save overwrite protection
+- Added more player stats
+
 ### Version 0.0.2
 - Fixed save issues
 - Removed useless buttons

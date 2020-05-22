@@ -47,21 +47,19 @@ def choices(choices):
                 return i
 
 def setup():
-    # Having trouble adding this at the moment
-    # (Path.exists() is throwing an internal error and I have yet to check docs as to what is causing it.)
-    """
-    if Path.exists(f"{Path().resolve()}\\SaveGames\\save.alsave"):
+    # Having trouble adding this at the moment 
+    if Path(f"{Path().resolve()}\\SaveGames\\save.alsave").exists():
         while True:
+            clearscreen()
             print('Hey! We found a savegame, are you sure you want to overwrite it?')
             userin = input('(Y/N) >>> ')
-            if userin.lower in ('y','n'):
-                if (userin.lower=='y'):
+            if userin.lower() in ('y','n'):
+                if (userin.lower()=='y'):
                     break
                 else:
                     return 'NULL'
             else:
                 continue
-    """
     while True:
         clearscreen()
         userin = input('Please name your world:\n>>> ')
@@ -89,7 +87,10 @@ def setup():
 def mainmenu():
     userin = choices(('New', 'Load', 'Exit'))
     if (userin==0):
-        game = SaveGame(*setup())
+        game = setup()
+        if (game=='NULL'):
+            return game
+        game = SaveGame(*game)
         g_save(game)
         return game
     elif (userin==1):

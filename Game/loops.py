@@ -22,44 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-class GameMap():
-    def __init__(self, mseed):
-        self.seed = mseed
-
-class Inventory(dict):
-    def __init__(self, size):
-        super().__init__()
-        self.size = 100
-    
-    def add(self, key, obj):
-        if len(self.keys()>=size):
-            return False
-        else:
-            self[key] = obj
-            return True
-
-    def remove(self, key):
-        if (key in self.keys()):
-            del self[key]
-            return True
-        else:
-            return False
-
-    def getall(self):
-        return self.keys()
-
-class Player():
-    def __init__(self, pname):
-        self.name = pname
-        self.type = None
-        self.health = 100
-        self.balance = 0
-        self.inventory = Inventory()
-        self.poison = False
-
-
-class SaveGame():
-    def __init__(self, gname, pname, mseed):
-        self.name = gname
-        self.player = Player(pname)
-        self.map = GameMap(mseed)
+def loop(game):
+    if (game.player.health<0):
+        # death
+        pass
+    elif (game.player.poison):
+        # health tick
+        pass
