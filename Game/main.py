@@ -31,8 +31,8 @@ def clearscreen():
 
 from os import get_terminal_size
 if (get_terminal_size()[0]<30) or (get_terminal_size()[1]<10):
-    print('Oops!\nIt looks like your terminal is not big enough for Afterlife...')
-    exit()
+    print('Oops!\nIt looks like your terminal is a little too small. Please consider making it bigger so you can enjoy a better experience.')
+    input('...')
 
 try:
     game = 'NULL'

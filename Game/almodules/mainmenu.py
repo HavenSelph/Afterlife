@@ -22,13 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 from .objects import SaveGame
-from .game import save as g_save
-from .game import load as g_load
+from .gamesl import save as g_save
+from .gamesl import load as g_load
 from os import get_terminal_size
 from os import system
 from colorama import init as color
 color()
 from colorama import Fore
+from pathlib import Path
 
 def clearscreen():
     system('cls')
@@ -46,6 +47,21 @@ def choices(choices):
                 return i
 
 def setup():
+    # Having trouble adding this at the moment
+    # (Path.exists() is throwing an internal error and I have yet to check docs as to what is causing it.)
+    """
+    if Path.exists(f"{Path().resolve()}\\SaveGames\\save.alsave"):
+        while True:
+            print('Hey! We found a savegame, are you sure you want to overwrite it?')
+            userin = input('(Y/N) >>> ')
+            if userin.lower in ('y','n'):
+                if (userin.lower=='y'):
+                    break
+                else:
+                    return 'NULL'
+            else:
+                continue
+    """
     while True:
         clearscreen()
         userin = input('Please name your world:\n>>> ')
