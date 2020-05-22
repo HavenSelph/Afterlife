@@ -49,6 +49,13 @@ class Damage():
         self.base = dp
         self.boost = 0
 
+class Base():
+    def __init__(self, name, hp, bd, lt):
+        self.name = name
+        self.health = Health(hp)
+        self.damage = Damage(bd)
+        self.loot_table = LootTable(lt)
+
 # Constructors
 class Item():
     class Armor():
@@ -70,14 +77,6 @@ class Item():
     class Coin():
         def __init__(self, value: int):
             self.value = value
-
-
-class Base():
-    def __init__(self, name, hp, bd, lt):
-        self.name = name
-        self.health = Health(hp)
-        self.damage = Damage(bd)
-        self.loot_table = LootTable(lt)
 
 class NPC():
     class Wild():

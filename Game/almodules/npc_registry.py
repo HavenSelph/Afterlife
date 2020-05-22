@@ -23,4 +23,3 @@ SOFTWARE.
 """
 
 from .objects import NPC
-
