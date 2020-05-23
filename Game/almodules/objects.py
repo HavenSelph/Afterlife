@@ -154,14 +154,16 @@ class Player():
         self.inventory = Inventory()
 
 # Gamemap
+"""
 class GameMap():
     def __init__(self, mseed):
         self.seed = mseed
+"""
 
 # All objects
 class SaveGame():
-    def __init__(self, version, gname, pname, mseed):
+    def __init__(self, version, gname, pname):
         self.version = version
         self.name = gname
         self.player = Player(pname)
-        self.map = GameMap(mseed)
+        # self.map = GameMap(mseed)

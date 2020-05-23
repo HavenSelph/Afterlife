@@ -68,4 +68,3 @@ except SystemExit:
     print('Closing down game...')
     if not (game=='NULL'): # Check if game has been setup
         save(game)
-

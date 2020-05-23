@@ -66,6 +66,7 @@ def setup():
         if (len(userin)>2):
             gname = userin
             break
+    """    
     while True:
         clearscreen()
         userin = input('Please choose a seed (numbers only):\n>>> ')
@@ -76,13 +77,14 @@ def setup():
         else:
             mseed = userin
             break
+    """
     while True:
         clearscreen()
         userin = input('Please name your character:\n>>> ')
         if (len(userin)>2):
             pname = userin
             break
-    return gname, pname, mseed
+    return gname, pname # mseed
 
 def mainmenu(version):
     userin = choices(('New', 'Load', 'Exit'))
