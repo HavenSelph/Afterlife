@@ -27,11 +27,11 @@ class DynamicID(dict):
         super().__init__()
         self.name = name
         self.id = 0
-    def get_id(self, name):
-        self[name] = self.id
-        self[self.id] = name
+    def get_id(self, object):
+        self[self.id] = object
+        self[object.name] = object
         self.id += 1
-        return self[name]
+        return self.id - 1
 
 id_sys = DynamicID('NPC')
 
@@ -41,28 +41,33 @@ def get_id_setup():
 
 class Item():
     class Armor():
-        def __init__(self, name: str, ep: int, hb: int=0, db: int=0, ap: int=0):
-            self.id = get_id_setup().get_id(name)
+        def __init__(self, name: str, equip_place: int, health_modifier: int=0, armor_modifier: int=0, damage_modifier: int=0):
             self.name = name
-            self.health_boost = hb
-            self.damage_boost = db
-            self.armor_boost = ab
-            if ep in range(0,3):
-                self.equip_place = ep
+            self.health_modifier = health_modifier
+            self.armor_modifier = armor_modifier
+            self.damage_modifier = damage_modifier
+            if equip_place in (0,1,2,3):
+                self.equip_place = equip_place
             else:
-                raise ValueError(f'Equipment Place invalid!\nEquipment in question: {self.name}\nEP value: {ep}')
-            self.equpied = False
+                print('Bad item! Please screenshchot below error:')
+                raise ValueError(f'Equipment Place invalid!\nEquipment in question: {self.name}\nEP value: {equip_place}')
+            self.equipped = False
+            self.id = get_id_setup().get_id(self)
+        
     class Weapon():
-        def __init__(self, name: str, hb: int=0, db: int=0):
-            self.id = get_id_setup().get_id(name)
+        def __init__(self, name: str, health_modifier: int=0, damage_modifier: int=0):
             self.name = name
-            self.health_boost = hb
-            self.damage_bost = db
+            self.health_modifier = health_modifier
+            self.damage_modifier = damage_modifier
+            self.equip_place = 4
             self.equiped = False
+            self.id = get_id_setup().get_id(self)
+        
     class Coin():
         def __init__(self, name, value: int):
-            self.id = get_id_setup().get_id(name)
+            self.name = name
             self.value = value
+            self.id = get_id_setup().get_id(self)
 
 """
 ep = equipment place [0 Helmet, 1 Chestplate, 2 Pants, 3 Boots, 4 Weapon]
@@ -73,4 +78,12 @@ ab = armorboost
 """
 
 item_registry = [id_sys]
-item_registry.append(Item.Armor('Wooden Helmet', 0, 0, 0, 1))
+item_registry.append(Item.Armor('Cloth Hat', 0, 0, 1, 0))
+item_registry.append(Item.Armor('Cloth Shirt', 1, 0, 1, 0))
+item_registry.append(Item.Armor('Cloth Leggings', 2, 0, 1, 0))
+item_registry.append(Item.Armor('Cloth Sandals', 3, 0, 1, 0))
+item_registry.append(Item.Weapon('Small Dagger', 0, 2))
+
+def get_registry():
+    global item_registry
+    return item_registry

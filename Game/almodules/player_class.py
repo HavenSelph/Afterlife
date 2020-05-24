@@ -21,7 +21,44 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-# Extra stuff needed at the top
+# Subs
+class Health():
+    def __init__(self, health_points=100):
+        self.base = health_points
+        self.modifier = 0
+        self.current = self.base + self.modifier
+        self.regen = 0
+        self.poison = 0
+
+    def calculate(self):
+        self.current += self.regen if ((self.regen + self.current)<=self.max) else (self.max)
+        self.current -= self.poison
+        if (self.current <= 0):
+            self.dead = True
+
+    @property
+    def max(self):
+        return self.base + self.modifier
+
+class Armor():
+    def __init__(self, armor_points=0):
+        self.armor = armor_points
+        self.armor_boost = 0
+    
+    @property
+    def current(self):
+        return self.armor + self.armor_boost
+
+class Damage():
+    def __init__(self, damage_points=10):
+        self.base = damage_points
+        self.boost = 0
+    
+    @property
+    def current(self):
+        return self.base + self.boost
+
+# Inventory management (by me)
 class Equipped():
     def __init__(self):
         self.helmet = None
@@ -29,27 +66,10 @@ class Equipped():
         self.leggings = None
         self.weapon = None
 
-class LootTable():
-    def __init__(self, *items):
-        super().__init__()
-        for item in items:
-            self[item.name] = (item, item.chance, item.range)
+    @property
+    def all(self):
+        return {'Helmet':self.helmet,'Chestplate':self.chestplate,'Leggings':self.leggings,'Weapon':self.weapon}
 
-class Health():
-    def __init__(self, hp=100):
-        self.current = hp
-        self.base = hp
-        self.boost = 0
-        self.regen = 0
-        self.poison = 0
-
-class Damage():
-    def __init__(self, dp=10):
-        self.current = dp
-        self.base = dp
-        self.boost = 0
-
-# Inventory
 class Inventory(dict):
     def __init__(self):
         super().__init__()
@@ -74,52 +94,27 @@ class Inventory(dict):
         return self.keys()
 
     def equip(self, key):
-        try:
-            self[key].equipped = True
-            if (self[key].ep==0):
-                self.equipped.helmet = self[key]
-            elif (self[key].ep==1):
-                self.equipped.chestplate = self[key]
-            elif (self[key].ep==2):
-                self.equipped.leggins = self[key]
-            elif (self[key].ep==3):
-                self.equipped.weapon = self[key]
-        except ValueError:
-            return False
-        else:
-            return True
+        self[key].equipped = True
+        if (self[key].ep==0):
+            self.equipped.helmet = self[key]
+        elif (self[key].ep==1):
+            self.equipped.chestplate = self[key]
+        elif (self[key].ep==2):
+            self.equipped.leggins = self[key]
+        elif (self[key].ep==3):
+            self.equipped.weapon = self[key]
 
-    def get_equipped(self):
-        return {'Helmet':self.equipped.helmet,'Chestplate':self.equipped.chestplate,'Leggings':self.equipped.leggings,'Weapon':self.equipped.weapon}
-
-# Player
 class Player():
     def __init__(self, pname):
+        # Initial
         self.name = pname
-        self.type = None
-        self.dead = False # If you want to cheat and disable hardcore mode, ~/loops has the check for death
-        # Health Stats
+
+        # Stat Priming
+        # -- health
         self.health = Health()
-        # Damage Stats
+        
+        # -- armor
+        self.armor = Armor()
+
+        # -- damage
         self.damage = Damage()
-        self.damage.current = 0
-        self.damage.base = 0
-        self.damage.boost = 0
-        # Balance Stats
-        self.balance = 0
-        self.inventory = Inventory()
-
-# Gamemap
-"""
-class GameMap():
-    def __init__(self, mseed):
-        self.seed = mseed
-"""
-
-# All objects
-class SaveGame():
-    def __init__(self, version, gname, pname):
-        self.version = version
-        self.name = gname
-        self.player = Player(pname)
-        # self.map = GameMap(mseed)

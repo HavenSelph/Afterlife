@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-from .objects import SaveGame
+from .gameobject import SaveGame
 from .gamesl import save as g_save
 from .gamesl import load as g_load
 from os import get_terminal_size

@@ -27,11 +27,11 @@ class DynamicID(dict):
         super().__init__()
         self.name = name
         self.id = 0
-    def get_id(self, name):
-        self[name] = self.id
-        self[self.id] = name
+    def get_id(self, object):
+        self[self.id] = object
+        self[object.name] = object
         self.id += 1
-        return self[name]
+        return self.id - 1
 
 class Equipped():
     def __init__(self):
@@ -40,6 +40,11 @@ class Equipped():
         self.leggings = None
         self.weapon = None
 
+class LootTable():
+    def __init__(self, *items):
+        super().__init__()
+        for item in items:
+            self[item.id] = ()
 
 id_sys = DynamicID('NPC')
 
@@ -49,42 +54,47 @@ def get_id_setup():
 
 class NPC():
     class Wild():
-        class Wolf():
-            def __init__(self):
-                self.id = get_id_setup().get_id('Wolf')
-                self.hostility = 1
-        class Bear():
-            def __init__(self):
-                self.id = get_id_setup().get_id('Bear')
-                self.hostility = 1
+        def __init__(self, name, health_points, armor_points, damage_points, neutrality):
+            # Prime
+            self.name = name
+            self.health_points = health_points
+            self.armor_points = armor_points
+            self.damage_points = damage_points
+            self.neutrality = neutrality
+            self.loot_table = LootTable()
+
+            # Final
+            self.id = self.get_id_setup().get_id(self)            
 
     class Undead():
-        class Zombie():
-            def __init__(self):
-                self.id = get_id_setup().get_id('Zombie')
-                self.equipped = Equipped()
-        class Skeleton():
-            def __init__(self):
-                self.id = get_id_setup().get_id('Skeleton')
-                self.equipped = Equipped()
+        def __init__(self, name, health_points, armor_points, damage_points, neutrality):
+            # Prime
+            self.name = name
+            self.health_points = health_points
+            self.armor_points = armor_points
+            self.damage_points = damage_points
+            self.neutrality = neutrality
+            self.loot_table = LootTable()
+
+            # Final
+            self.id = self.get_id_setup().get_id(self)
 
     class Bandit():
-        class Thief():
-            def __init__(self):
-                self.id = get_id_setup().get_id('Thief')
-                self.equipped = Equipped()
+        def __init__(self, name, health_points, armor_points, damage_points, neutrality, loot_table):
+            # Prime
+            self.name = name
+            self.health_points = health_points
+            self.armor_points = armor_points
+            self.damage_points = damage_points
+            self.neutrality = neutrality
+            self.loot_table = LootTable()
 
-npc_registry = []
-npc_registry.append(id_sys)
-npc_registry.append(NPC.Wild.Wolf())
-npc_registry.append(NPC.Wild.Bear())
-npc_registry.append(NPC.Undead.Zombie())
-npc_registry.append(NPC.Undead.Skeleton())
-npc_registry.append(NPC.Bandit.Thief())
+            # Final
+            self.id = self.get_id_setup().get_id(self)
+
+npc_registry = [id_sys]
+
 
 def get_registry():
     global npc_registry
-    global id_sys
-    for item in npc_registry[1:]:
-        print(f'{id_sys[item.id]} : {item.id}\n')
     return npc_registry
