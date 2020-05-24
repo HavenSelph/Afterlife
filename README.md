@@ -2,7 +2,7 @@
 *This game is licensed under the* **MIT** *license. Please read more about that in the ~\LICENSE file.*
 
 ### If you want to play the game...
-*You can do so at my Repl.it page that will be linked here soon.*
+[![Run on Repl.it](https://repl.it/badge/github/HavenSelph/Afterlife)](https://repl.it/github/HavenSelph/Afterlife)
 
 ### If you want to report an issue...
 *I don't mind if you do that on here or on Repl.it.*
