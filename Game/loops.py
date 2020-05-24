@@ -39,7 +39,9 @@ def loop(game):
     # Stat loops
     game.player.health.boost = 0
     game.player.damage.boost = 0
+    game.player.armor.boost = 0
     for item in game.player.inventory.get_equipped().values():
         if not (item==None):
+            game.player.armor.boost += item.armor_boost
             game.player.health.boost += item.health_boost
             game.player.damage.boost += item.damage_boost

@@ -49,28 +49,6 @@ class Damage():
         self.base = dp
         self.boost = 0
 
-# Constructors
-class Item():
-    class Armor():
-        def __init__(self, name: str, ep: int, hb: int=0, db: int=0):
-            self.name = name
-            self.health_boost = hb
-            self.damage_boost = db
-            if ep in range(0,3):
-                self.equip_place = ep
-            else:
-                raise ValueError(f'Equipment Place invalid!\nEquipment in question: {self.name}\nEP value: {ep}')
-            self.equpied = False
-    class Weapon():
-        def __init__(self, name: str, hb: int=0, db: int=0):
-            self.name = name
-            self.health_boost = hb
-            self.damage_bost = db
-            self.equiped = False
-    class Coin():
-        def __init__(self, value: int):
-            self.value = value
-
 # Inventory
 class Inventory(dict):
     def __init__(self):

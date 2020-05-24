@@ -7,6 +7,12 @@
 ### If you want to report an issue...
 *I don't mind if you do that on here or on Repl.it.*
 
+# Dev Notes
+- Work on item_registry
+- Work on new loop setup
+- Change how boost points are handled
+- Possibly change player class
+
 # Changelogs
 ### Version 0.0.6a
 - Fixed NPC registry issues

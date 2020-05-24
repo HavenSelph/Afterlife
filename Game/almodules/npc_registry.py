@@ -74,17 +74,17 @@ class NPC():
                 self.id = get_id_setup().get_id('Thief')
                 self.equipped = Equipped()
 
-registry = []
-registry.append(id_sys)
-registry.append(NPC.Wild.Wolf())
-registry.append(NPC.Wild.Bear())
-registry.append(NPC.Undead.Zombie())
-registry.append(NPC.Undead.Skeleton())
-registry.append(NPC.Bandit.Thief())
+npc_registry = []
+npc_registry.append(id_sys)
+npc_registry.append(NPC.Wild.Wolf())
+npc_registry.append(NPC.Wild.Bear())
+npc_registry.append(NPC.Undead.Zombie())
+npc_registry.append(NPC.Undead.Skeleton())
+npc_registry.append(NPC.Bandit.Thief())
 
 def get_registry():
-    global registry
+    global npc_registry
     global id_sys
-    for item in registry[1:]:
+    for item in npc_registry[1:]:
         print(f'{id_sys[item.id]} : {item.id}\n')
-    return registry
+    return npc_registry
