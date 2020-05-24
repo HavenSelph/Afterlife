@@ -8,6 +8,11 @@
 *I don't mind if you do that on here or on Repl.it.*
 
 # Changelogs
+### Version 0.0.6a
+- Fixed NPC registry issues
+- Added a dynamic id system
+- ...
+
 ### Version 0.0.5c
 - Fixed many issues with save, items, player, and monster classes
 - Redid class system

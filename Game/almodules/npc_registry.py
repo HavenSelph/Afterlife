@@ -21,4 +21,70 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-from .objects import NPC
+
+class DynamicID(dict):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
+        self.id = 0
+    def get_id(self, name):
+        self[name] = self.id
+        self[self.id] = name
+        self.id += 1
+        return self[name]
+
+class Equipped():
+    def __init__(self):
+        self.helmet = None
+        self.chestplate = None
+        self.leggings = None
+        self.weapon = None
+
+
+id_sys = DynamicID('NPC')
+
+def get_id_setup():
+    global id_sys
+    return id_sys
+
+class NPC():
+    class Wild():
+        class Wolf():
+            def __init__(self):
+                self.id = get_id_setup().get_id('Wolf')
+                self.hostility = 1
+        class Bear():
+            def __init__(self):
+                self.id = get_id_setup().get_id('Bear')
+                self.hostility = 1
+
+    class Undead():
+        class Zombie():
+            def __init__(self):
+                self.id = get_id_setup().get_id('Zombie')
+                self.equipped = Equipped()
+        class Skeleton():
+            def __init__(self):
+                self.id = get_id_setup().get_id('Skeleton')
+                self.equipped = Equipped()
+
+    class Bandit():
+        class Thief():
+            def __init__(self):
+                self.id = get_id_setup().get_id('Thief')
+                self.equipped = Equipped()
+
+registry = []
+registry.append(id_sys)
+registry.append(NPC.Wild.Wolf())
+registry.append(NPC.Wild.Bear())
+registry.append(NPC.Undead.Zombie())
+registry.append(NPC.Undead.Skeleton())
+registry.append(NPC.Bandit.Thief())
+
+def get_registry():
+    global registry
+    global id_sys
+    for item in registry[1:]:
+        print(f'{id_sys[item.id]} : {item.id}\n')
+    return registry

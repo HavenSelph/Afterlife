@@ -49,13 +49,6 @@ class Damage():
         self.base = dp
         self.boost = 0
 
-class Base():
-    def __init__(self, name, hp, bd, lt):
-        self.name = name
-        self.health = Health(hp)
-        self.damage = Damage(bd)
-        self.loot_table = LootTable(lt)
-
 # Constructors
 class Item():
     class Armor():
@@ -77,21 +70,6 @@ class Item():
     class Coin():
         def __init__(self, value: int):
             self.value = value
-
-class NPC():
-    class Wild():
-        class Wolf(Base):
-            def __init__(self):
-                self.equipped = Equipped()
-                self.hostility = 0.2
-    class Undead():
-        class Zombie(Base):
-            def __init__(self):
-                pass
-    class Bandit(Base):
-        class Thief():
-            def __init__(self):
-                pass
 
 # Inventory
 class Inventory(dict):
