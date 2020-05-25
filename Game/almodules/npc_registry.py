@@ -93,7 +93,11 @@ class NPC():
             self.id = self.get_id_setup().get_id(self)
 
 npc_registry = [id_sys]
-
+npc_registry.append(NPC.Wild('Wolf', 20, 1, 2, 1))
+npc_registry.append(NPC.Wild('Bear', 50, 1, 2, 2))
+npc_registry.append(NPC.Undead('Zombie', 20, 2, 1, 2))
+npc_registry.append(NPC.Undead('Skeleton', 20, 1, 1, 2))
+npc_registry.append(NPC.Bandit('Thief', 20, 1, 1, 2))
 
 def get_registry():
     global npc_registry

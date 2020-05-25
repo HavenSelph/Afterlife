@@ -83,6 +83,7 @@ item_registry.append(Item.Armor('Cloth Shirt', 1, 0, 1, 0))
 item_registry.append(Item.Armor('Cloth Leggings', 2, 0, 1, 0))
 item_registry.append(Item.Armor('Cloth Sandals', 3, 0, 1, 0))
 item_registry.append(Item.Weapon('Small Dagger', 0, 2))
+# item_registry.append(Item.)
 
 def get_registry():
     global item_registry

@@ -7,17 +7,16 @@
 ### If you want to report an issue...
 *I don't mind if you do that on here or on Repl.it.*
 
-# Dev Notes
-- Work on item_registry
-- Work on new loop setup
-- Change how boost points are handled
-- Possibly change player class
-
 # Changelogs
-### Version 0.0.6a
+### Version 0.0.7
+- Remembered I should definitley start changing current version in file
+- Redid the object formats
+- Completely revamped player class
+
+### Version 0.0.6
 - Fixed NPC registry issues
 - Added a dynamic id system
-- ...
+- Totally forgot to remove the dots lol
 
 ### Version 0.0.5c
 - Fixed many issues with save, items, player, and monster classes
