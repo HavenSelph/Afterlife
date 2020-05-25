@@ -37,11 +37,16 @@ def loop(game):
         # Need to add more here...
         pass
     # Stat loops
-    game.player.health.boost = 0
-    game.player.damage.boost = 0
-    game.player.armor.boost = 0
+    game.player.health.modifier = 0
+    game.player.damage.modifier = 0
+    game.player.armor.modifier = 0
     for item in game.player.inventory.get_equipped().values():
         if not (item==None):
-            game.player.armor.boost += item.armor_boost
-            game.player.health.boost += item.health_boost
-            game.player.damage.boost += item.damage_boost
+            try:
+                game.player.armor.modifier += item.armor_modifier
+                game.player.health.modifier += item.health_modifier
+                game.player.damage.modifier += item.damage_modifier 
+            except ValueError:
+                pass
+    game.player.health.calculate()
+    

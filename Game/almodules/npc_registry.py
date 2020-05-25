@@ -44,7 +44,10 @@ class LootTable():
     def __init__(self, *items):
         super().__init__()
         for item in items:
-            self[item.id] = ()
+            self[item.id] = LootTable.build(*items)
+    @classmethod
+    def build(cls, *itmes):
+        return [(a, b, c) for (a, b, c) in (items)]
 
 id_sys = DynamicID('NPC')
 
@@ -54,7 +57,7 @@ def get_id_setup():
 
 class NPC():
     class Wild():
-        def __init__(self, name, health_points, armor_points, damage_points, neutrality):
+        def __init__(self, name, health_points, armor_points, damage_points, neutrality, loot_table):
             # Prime
             self.name = name
             self.health_points = health_points
@@ -64,10 +67,10 @@ class NPC():
             self.loot_table = LootTable()
 
             # Final
-            self.id = self.get_id_setup().get_id(self)            
+            self.id = get_id_setup().get_id(self)            
 
     class Undead():
-        def __init__(self, name, health_points, armor_points, damage_points, neutrality):
+        def __init__(self, name, health_points, armor_points, damage_points, neutrality, loot_table):
             # Prime
             self.name = name
             self.health_points = health_points
@@ -77,7 +80,7 @@ class NPC():
             self.loot_table = LootTable()
 
             # Final
-            self.id = self.get_id_setup().get_id(self)
+            self.id = get_id_setup().get_id(self)
 
     class Bandit():
         def __init__(self, name, health_points, armor_points, damage_points, neutrality, loot_table):
@@ -90,14 +93,14 @@ class NPC():
             self.loot_table = LootTable()
 
             # Final
-            self.id = self.get_id_setup().get_id(self)
+            self.id = get_id_setup().get_id(self)
 
 npc_registry = [id_sys]
-npc_registry.append(NPC.Wild('Wolf', 20, 1, 2, 1))
-npc_registry.append(NPC.Wild('Bear', 50, 1, 2, 2))
-npc_registry.append(NPC.Undead('Zombie', 20, 2, 1, 2))
-npc_registry.append(NPC.Undead('Skeleton', 20, 1, 1, 2))
-npc_registry.append(NPC.Bandit('Thief', 20, 1, 1, 2))
+npc_registry.append(NPC.Wild('Wolf', 20, 1, 2, 1, 'NULL'))
+npc_registry.append(NPC.Wild('Bear', 50, 1, 2, 2, 'NULL'))
+npc_registry.append(NPC.Undead('Zombie', 20, 2, 1, 2, 'NULL'))
+npc_registry.append(NPC.Undead('Skeleton', 20, 1, 1, 2, 'NULL'))
+npc_registry.append(NPC.Bandit('Thief', 20, 1, 1, 2, 'NULL'))
 
 def get_registry():
     global npc_registry

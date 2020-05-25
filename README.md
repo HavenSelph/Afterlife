@@ -12,6 +12,7 @@
 - Remembered I should definitley start changing current version in file
 - Redid the object formats
 - Completely revamped player class
+- Remade some objects
 
 ### Version 0.0.6
 - Fixed NPC registry issues
