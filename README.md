@@ -13,6 +13,7 @@
 - Redid the object formats
 - Completely revamped player class
 - Remade some objects
+- Started work on the actual gameplay
 
 ### Version 0.0.6
 - Fixed NPC registry issues

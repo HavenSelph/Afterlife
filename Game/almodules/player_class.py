@@ -118,3 +118,6 @@ class Player():
 
         # -- damage
         self.damage = Damage()
+
+        # -- inventory
+        self.inventory = Inventory()

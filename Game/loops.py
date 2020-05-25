@@ -21,26 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+from random import randint
 
 def loop(game):
-    # Health loops
-    if (game.player.health.poison>0):
-        print(f'- You lost {game.player.health.poison} health to poison.')
-        game.player.health -= game.player.poison
-        pass
-    elif (game.player.health.regen>0):
-        print(f'+ You gained {game.player.health.regen} to regeneration.')
-        game.player.health += game.player.poison
-        pass
-    elif (game.player.health.current<0):
-        game.player.dead = True # Yes this is the single check for death lol
-        # Need to add more here...
-        pass
     # Stat loops
     game.player.health.modifier = 0
     game.player.damage.modifier = 0
     game.player.armor.modifier = 0
-    for item in game.player.inventory.get_equipped().values():
+    for item in game.player.inventory.equipped.all.values():
         if not (item==None):
             try:
                 game.player.armor.modifier += item.armor_modifier
@@ -49,4 +37,18 @@ def loop(game):
             except ValueError:
                 pass
     game.player.health.calculate()
-    
+
+    # Encounters
+    if (x:=randint(0,5)==0):
+        print('Nothing happen')
+    elif (x==1):
+        print('Nothing happened')
+    elif (x==2):
+        print('Nothing happened')
+    elif (x==3):
+        print('Nothing happened')
+    elif (x==4):
+        print('Nothing happened')
+    elif (x==5):
+        print('Nothing happened')
+    input()    
