@@ -1,5 +1,5 @@
 # Hey there!
-*This game is licensed under the* **MIT** *license. Please read more about that in the ~\LICENSE file.*
+*This game is licensed under the* **MIT** *license. Please read more about that in the [LICENSE file](https://github.com/HavenSelph/Afterlife/blob/master/LICENSE.txt).*
 
 ### If you want to play the game...
 [![Run on Repl.it](https://repl.it/badge/github/HavenSelph/Afterlife)](https://repl.it/github/HavenSelph/Afterlife)
